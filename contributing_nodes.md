@@ -1,3 +1,5 @@
+---
+---
 # Contributing nodes to EdgeNet
 
 **TODO**: This page will describe how to contribute own nodes to EdgeNet.
