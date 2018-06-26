@@ -6,7 +6,7 @@
   pages
   {% endcomment %}
 
-  {% assign item_state = '""' %}
+  {% assign item_state = "" %}
   {% if item.url == page.url %}
     {% assign item_state = "active" %}
   {% else %}
@@ -34,12 +34,12 @@
       {% if subitem.url == page.url %}
         {% assign subitem_state = "active" %}
       {% else %}
-        {% assign subitem_state = '""' %}
+        {% assign subitem_state = "" %}
       {% endif %}
 
       <li>
         <a href="{{subitem.url}}"
-          class={{subitem_state}}>
+          class="{{subitem_state}}">
           {{subitem.text}}
           {% if subitem.external %}
           <img src="/assets/images/link-external.png">
