@@ -1,8 +1,8 @@
 - text: Get started
   sub:
-    - text: Using EdgeNet
+    - text: Use EdgeNet
       url: /using_EdgeNet.html
-    - text: Contributing nodes
+    - text: Contribute nodes
       url: /contributing_nodes.html
 - text: About
   sub:
@@ -12,5 +12,5 @@
       url: /people.html
     - text: Publications
       url: /publications.html
-- text: Further Reading
+- text: Read more
   url: /further_reading.html
