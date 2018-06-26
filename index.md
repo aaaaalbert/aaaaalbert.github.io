@@ -22,7 +22,7 @@ been approved, she will be able to use standard Kubernetes tools and
 technologies to deploy an application across the EdgeNet
 infrastructure.
 
-### To use EdgeNet, please proceed to the [EdgeNet Portal](https://sundewcluster.appspot.com/).
+**To use EdgeNet, please proceed to the [EdgeNet Portal](https://sundewcluster.appspot.com/).**
 
 
 
@@ -50,9 +50,20 @@ the public via the [EdgeNet Portal](https://sundewcluster.appspot.com/).
 Please see [our space on GitHub](https://github.com/EdgeNet-Project)
 for up-to-date information!
 
+
 # Acknowledgements
 
-EdgeNet is a joint project of [US Ignite](https://www.us-ignite.org), [the NYU Tandon School of Engineering](https://engineering.nyu.edu/)[The Swarm Lab at UC-Berkeley](https://swarmlab.berkeley.edu/home), and [PlanetLab Europe](https://www.planet-lab.eu/).  It is funded by the [National Science Foundation](https://www.nsf.org/) under contract CNS-1820901.  Nodes are provided by the US [GENI](https://geni.net) and [ExoGENI](http://www.exogeni.net/) projects, Canada's [Smart Applications on Virtual Infrastructure](https://www.savinetwork.ca/) project, and [PlanetLab Europe](https://www.planet-lab.eu/).  The cluster head node is hosted by the [Computer Sciences department at the University of Victoria](https://www.uvic.ca/engineering/computerscience/)
+EdgeNet is a joint project of [US Ignite](https://www.us-ignite.org),
+[the NYU Tandon School of Engineering](https://engineering.nyu.edu/),
+[The Swarm Lab at UC-Berkeley](https://swarmlab.berkeley.edu/home), and
+[PlanetLab Europe](https://www.planet-lab.eu/).  It is funded by the
+[National Science Foundation](https://www.nsf.org/) under contract CNS-1820901.
+Nodes are provided by the US [GENI](https://geni.net) and
+[ExoGENI](http://www.exogeni.net/) projects,
+Canada's [Smart Applications on Virtual Infrastructure](https://www.savinetwork.ca/) project, and
+[PlanetLab Europe](https://www.planet-lab.eu/). The cluster head node
+is hosted by the
+[Computer Sciences department at the University of Victoria](https://www.uvic.ca/engineering/computerscience/)
 
 
 
