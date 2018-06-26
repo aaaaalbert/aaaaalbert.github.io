@@ -1,3 +1,5 @@
+---
+---
 # EdgeNet Status
 
 As of June 2018, a first version of EdgeNet is available on the
