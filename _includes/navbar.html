@@ -1,0 +1,21 @@
+<ul>
+  {% for item in site.data.navbar %}
+
+  <li>
+    {% if item.url %}
+    <a href="{{item.url}}">{{item.text}}</a>
+    {% else %}
+    <label for="drop-{{forloop.index}}">{{item.text}}</label>
+    <input id="drop-{{forloop.index}}" type="checkbox">
+    <ul>
+      <li>
+        <a href="{{subitem.url}}">
+          {{subitem.text}}
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </li>
+  {% endfor %}
+</ul>
