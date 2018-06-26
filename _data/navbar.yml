@@ -1,3 +1,5 @@
+- text: Home
+  url: /index.html
 - text: Get started
   sub:
     - text: Use EdgeNet
