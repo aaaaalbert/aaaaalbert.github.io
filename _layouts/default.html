@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<html lang="{{ site.lang | default: "en-US" }}">
+
+  <head>
+    <meta charset='utf-8'>
+    <meta name="description" content="{{ site.title }} : {{ site.description }}">
+
+    {% comment %}
+    We have no FAVICON and style sheets at the moment.
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" media="screen" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+    {% endcomment %}
+  </head>
+
+  <body>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+      <header class="inner">
+      <a href="/">
+        <h1 id="project_title">
+          <img src="{{site.logo_url}}"/>
+          <span>{{site.title}}</span>
+        </h1>
+        <h2 id="project_tagline">
+          {{site.description}}
+        </h2>
+      </a>
+      </header>
+    </div>
+
+    {% if site.data.navbar %}
+    <div id="navbar_wrap" class="outer">
+      <nav class="inner">
+        {% include navbar.html %}
+      </nav>
+    </div>
+    {% endif %}
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="{{page.css_id}}" class="content inner">
+        {{ content }}
+      </section>
+    </div>
+
+    {% comment %}
+    We have no page footer at the moment.
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        {% include footer.html %}
+      </footer>
+    </div>
+    {% endcomment %}
+
+  </body>
+</html>
