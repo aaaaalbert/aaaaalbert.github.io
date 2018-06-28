@@ -6,9 +6,10 @@
 
 EdgeNet is just a distributed [Kubernetes](https://kubernetes.io/)
 cluster.  If you’re familiar with Kubernetes, you can
-immediately jump to the sections [K8s Concepts](#K8sConcepts),
-[Getting my Kubernetes Configuration](#K8sConfig), and
-[Navigating the EdgeNet Portal](#EdgeNetPortal). 
+immediately jump to the sections [K8s Concepts](#k8s-concepts),
+<!-- [Getting my Kubernetes Configuration](#k8s-config), -->
+and
+[Navigating the EdgeNet Portal](#navigating-the-edgenet-portal). 
 If you’re not familiar with
 Kubernetes, read a short description in the next section.
 
@@ -39,7 +40,7 @@ so you can play with it on your laptop or local server.  In addition,
 there are Kubernetes profiles available on [CloudLab](https://cloudlab.us).
 
 
-## <a name="K8sConcepts">K8s Concepts</a>
+## K8s Concepts
 
 A K8s deployment is called a service.  An instance of a service is
 called a pod.  A pod is an ensemble of microservices, each of which
@@ -132,7 +133,7 @@ certificate, and for our purposes can be regarded as isomorphic to
 a GENI Project.
 
 
-# <a name="EdgeNetPortal">Navigating the EdgeNet Portal</a>
+# Navigating the EdgeNet Portal
 
 The EdgeNet portal holds and manages user namespaces and configuration
 files; however, management of the EdgeNet cluster is done by the

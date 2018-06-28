@@ -1,0 +1,18 @@
+- text: Home
+  url: /index.html
+- text: Get started
+  sub:
+    - text: Use EdgeNet
+      url: /using_EdgeNet.html
+    - text: Contribute nodes
+      url: /contributing_nodes.html
+- text: About
+  sub:
+    - text: Status
+      url: /status.html
+    - text: People
+      url: /people.html
+    - text: Publications
+      url: /publications.html
+- text: Read more
+  url: /further_reading.html
