@@ -178,16 +178,18 @@ on your computer, and click on "EdgeNet Head Node".  **_From here
 on out, you are working with the Kubernetes Head Node!_**
 
 Once you've clicked, you will see this screen:
+![Head Node](assets/images/headNode1.png)
 
 
 Sorry about the error messages in orange.  We are working to get
 rid of them.  You are in the default namespace, where you have no
 permissions.  Click on the namespace name (middle of the left-hand
-side) and type in the namespace name you saw in the welcome page.
+side) and type in the namespace name you saw in the welcome page, as in this image:
+![Namespace Entry](assets/images/headNode2.png)
+
 You'll see this
 
-More error messages (again, working to get rid of them).  Click
-them away, and then you will see this:
+![Dashboard Ready](assets/images/dashboardReady.png)
 
 Cool.  You now have a Kubernetes head node, and if you've done the
 Kubernetes tutorials you know what to do next.  Have fun.
