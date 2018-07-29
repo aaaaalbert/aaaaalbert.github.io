@@ -4,22 +4,22 @@
 In this tutorial, we're going to show you how to deploy a minimal experiment across EdgeNet and use it.  This tutorial assumes that you're using some Unix-derived system, such as Linux, Max OSX, or a Linux-based VM on Windows.  It's likely a cygwin environment will work on Windows as well, but I haven't tried that.
 ## Have on Hand
 Software you should have installed to run this tutorial:
-1. [Docker] [https://www.docker.com/]
-2. [node.js] [https://nodejs.org/en/]
+1. [Docker](https://www.docker.com/)
+2. [node.js](https://nodejs.org/en/)
 Very helpful:
-1. [kubectl] [https://kubernetes.io/docs/tasks/tools/install-kubectl/].  This is to control and query Kubernetes from your desktop rather than use the dashboard, though you can do everything on the dashboard.
-2. [Minikube] [https://kubernetes.io/docs/setup/minikube/].  This lets you run a Kubernetes cluster on your laptop, very handy for testing.
+1. [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/).  This is to control and query Kubernetes from your desktop rather than use the dashboard, though you can do everything on the dashboard.
+2. [Minikube](https://kubernetes.io/docs/setup/minikube/).  This lets you run a Kubernetes cluster on your laptop, very handy for testing.
 As a note, node.js isn't essential.  We're just going to write a simple request/response HTTP server to do Hello, World, so if you prefer another server feel free.  It just need to serve a get request with an argument, and echo back the argument.
 ## Read Ahead of Time
-1. [Hello, Minikube] [https://kubernetes.io/docs/tutorials/hello-minikube/]
-2. [Hello, World in Kubernetes] [https://kubernetes-v1-4.github.io/docs/hellonode/] 
-3. [Docker Tutorial] [https://docs.docker.com/get-started/]
-4. [Using EdgeNet] [https://edge-net.org/using_EdgeNet.html]
+1. [Hello, Minikube](https://kubernetes.io/docs/tutorials/hello-minikube/)
+2. [Hello, World in Kubernetes](https://kubernetes-v1-4.github.io/docs/hellonode/)
+3. [Docker Tutorial](https://docs.docker.com/get-started/)
+4. [Using EdgeNet](https://edge-net.org/using_EdgeNet.html)
 You should also be familiar enough with node.js or whatever server you've chosen that you can write a simple request/response server in it.   We won't be covering how to do that here.
 ## Preparation
-1. Download your config file from the portal and save a copy as $HOME/.kube/config.  This is where Kubernetes looks for a configuration file.  (see [Using EdgeNet] [https://edge-net.org/using_EdgeNet.html] for how to download a config file)
+1. Download your config file from the portal and save a copy as $HOME/.kube/config.  This is where Kubernetes looks for a configuration file.  (see [Using EdgeNet](https://edge-net.org/using_EdgeNet.html) for how to download a config file)
 2. Run `$ kubectl get ns` if you've installed kubectl to make sure that you're talking to the right cluster.
-3. Ensure that you have a [Docker Hub][https://hub.docker.com/] account.  Docker is used to pull images onto your Services and Docker Hub is an extremely convenient place to pull from.
+3. Ensure that you have a [Docker Hub](https://hub.docker.com/) account.  Docker is used to pull images onto your Services and Docker Hub is an extremely convenient place to pull from.
 ## Write and Test Your Server
 This section assumes that we're using node.js as the server.  If you are not using node.js, modify this section for the server that you're using.  We used the following code:
 ```javascript
@@ -84,7 +84,7 @@ $ docker push <username>/edgenet-helloworld```
 to push to Docker Hub.
 
 ## Deploy a Service on EdgeNet
-Log in to the [EdgeNet head node][https://headnode.edge-net.org/] following the directions in [Using EdgeNet] [https://edge-net.org/using_EdgeNet.html].  Once you are logged in and have chosen your namespace, you should see ![Dashboard Ready](assets/images/dashboardReady.png).
+Log in to the [EdgeNet head node](https://headnode.edge-net.org/) following the directions in [Using EdgeNet](https://edge-net.org/using_EdgeNet.html).  Once you are logged in and have chosen your namespace, you should see ![Dashboard Ready](assets/images/dashboardReady.png).
 
 Click the Create Button in the top right.  You should see ![Create](assets/images/create.png).  Enter the following YAML code into the text box:
 
@@ -224,7 +224,7 @@ import urllib2
 pairs = [(node, node.split('.')[0]) for node in nodes]
 def get_response(query):
     try:
-       return urllib2.urlopen(q).read()
+       return urllib2.urlopen(query).read()
     except urllib2.URLError:
        return None
 port = 8080
