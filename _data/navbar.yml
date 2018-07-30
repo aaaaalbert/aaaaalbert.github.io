@@ -4,7 +4,7 @@
   sub:
     - text: Use EdgeNet
       url: /using_EdgeNet.html
-    - text: Hello World Tutorial
+    - text: Hello, World Tutorial
       url: /hello_world.html
     - text: Contribute nodes
       url: /contributing_nodes.html
