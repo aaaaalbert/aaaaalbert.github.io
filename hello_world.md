@@ -255,26 +255,103 @@ After a few seconds with your favorite editor, `foo.py` should look like this:
 
 ```python
 nodes = ['illinois.edge-net.io', 'ufl.edge-net.io', 'waynestate.edge-net.io', 'osf.edge-net.io', 'wv.edge-net.io', 'ucsd.edge-net.io', 'nysernet.edge-net.io', 'uh.edge-net.io', 'ohio.edge-net.io', 'indiana.edge-net.io', 'cenic.edge-net.io', 'toronto-core.edge-net.io', 'toronto.edge-net.io', 'louisiana.edge-net.io', 'iminds.edge-net.io', 'nps.edge-net.io', 'node-0', 'umich.edge-net.io', 'france.edge-net.io', 'clemson.edge-net.io', 'nyu.edge-net.io', 'northwestern.edge-net.io', 'hawaii.edge-net.io']
+port = 8080
 ```
 
-Time to add a little code to test things:
+Let's save this in a file called `data.py`.  We can then use this with some reporting code.
 
 ```python
-nodes = [ 'illinois.edge-net.io', 'ufl.edge-net.io', 'waynestate.edge-net.io', 'osf.edge-net.io', 'wv.edge-net.io', 'ucsd.edge-net.io', 'nysernet.edge-net.io', 'uh.edge-net.io', 'ohio.edge-net.io', 'indiana.edge-net.io', 'cenic.edge-net.io', 'toronto-core.edge-net.io', 'toronto.edge-net.io', 'louisiana.edge-net.io', 'iminds.edge-net.io', 'nps.edge-net.io', 'node-0', 'umich.edge-net.io', 'france.edge-net.io', 'clemson.edge-net.io', 'nyu.edge-net.io', 'northwestern.edge-net.io', 'hawaii.edge-net.io']
+#!/usr/bin/python2.7
 import urllib2
+import sys
+from data import nodes, port
+import time
+
+def get_response(node_tuple):
+  try:
+    query = node_tuple[0]
+    return (query, node_tuple[1], urllib2.urlopen(query).read().rstrip())
+  except urllib2.URLError:
+    return (node_tuple[1], 'Error')
+
+
 pairs = [(node, node.split('.')[0]) for node in nodes]
-def get_response(query):
-    try:
-       return urllib2.urlopen(query).read()
-    except urllib2.URLError:
-       return None
-port = 8080
-queries = ['http://%s:%d/hello?hostname=%s' % (pair[0], port, pair[1]) for pair in pairs]
+
+
+#
+# build the queries
+#
+queries = [('http://%s:%d/hello?hostname=%s' % (pair[0], port, pair[1]), pair[0]) for pair in pairs]
+
+#
+# get the results and split into error and non-error
+#
+
 results = [get_response(query) for query in queries]
-results
+errors = [result for result in results if result[1] == 'Error']
+results = [result for result in results if result[1] != 'Error']
+
+#
+# Print the unreachable nodes
+#
+if (len(errors) > 0): 
+  print '| Unreachable |'
+  print '|-------------|'
+  for e in errors: print '|'  + e[0] + ' |'
+if (len(results) > 0):
+  # get   the times for each result, and set up records
+  # for printing (node, greeting, time)
+  final = []
+  for r in results:
+    start = time.time()
+    get_response(r)
+    end = time.time()
+    final.append((r[1], r[2], (end - start) * 1000))
+  #
+  # print the results
+  #
+  
+  print '| Node | Greeting | Time in ms |'
+  print '|------|:--------:|-----------:|'
+ 
+  for f in final:
+    print '%s | %s | %d' % f
+
 ```
 
-This will take awhile, and we may find that some nodes aren't as healthy as we think.  Those are all the `None`s in the returned list.
+This will take awhile, and we may find that some nodes aren't as healthy as we think.  Those are all the errors.  When the code runs, this is what we see:
+
+
+| Unreachable |
+|-------------|
+|toronto-core.edge-net.io |
+|toronto.edge-net.io |
+|node-0 |
+|france.edge-net.io |
+|clemson.edge-net.io |
+
+
+| Node | Greeting | Time in ms |
+|------|:--------:|-----------:|
+illinois.edge-net.io | Hello, World, from illinois! | 134
+ufl.edge-net.io | Hello, World, from ufl! | 156
+waynestate.edge-net.io | Hello, World, from waynestate! | 147
+osf.edge-net.io | Hello, World, from osf! | 17
+wv.edge-net.io | Hello, World, from wv! | 153
+ucsd.edge-net.io | Hello, World, from ucsd! | 35
+nysernet.edge-net.io | Hello, World, from nysernet! | 160
+uh.edge-net.io | Hello, World, from uh! | 127
+ohio.edge-net.io | Hello, World, from ohio! | 148
+indiana.edge-net.io | Hello, World, from indiana! | 134
+cenic.edge-net.io | Hello, World, from cenic! | 29
+louisiana.edge-net.io | Hello, World, from louisiana! | 117
+iminds.edge-net.io | Hello, World, from iminds! | 491
+nps.edge-net.io | Hello, World, from nps! | 34
+umich.edge-net.io | Hello, World, from umich! | 189
+nyu.edge-net.io | Hello, World, from nyu! | 188
+northwestern.edge-net.io | Hello, World, from northwestern! | 147
+hawaii.edge-net.io | Hello, World, from hawaii! | 132
+
 
 
 
