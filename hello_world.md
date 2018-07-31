@@ -11,6 +11,7 @@ Software you should have installed to run this tutorial:
 Very helpful:
 
 1. [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/).  This is to control and query Kubernetes from your desktop rather than use the dashboard, though you can do everything on the dashboard.
+
 2. [Minikube](https://kubernetes.io/docs/setup/minikube/).  This lets you run a Kubernetes cluster on your laptop, very handy for testing.
 
 As a note, node.js isn't essential.  We're just going to write a simple request/response HTTP server to do Hello, World, so if you prefer another server feel free.  It just need to serve a get request with an argument, and echo back the argument.
@@ -26,7 +27,7 @@ You should also be familiar enough with node.js or whatever server you've chosen
 
 ## Preparation
 
-1. Download your config file from the portal and save a copy as $HOME/.kube/config.  This is where Kubernetes looks for a configuration file.  (see [Using EdgeNet](https://edge-net.org/using_EdgeNet.html) for how to download a config file)
+1. Download your config file from the portal and save a copy as $HOME/.kube/config.  This is where Kubernetes looks for a configuration file.  (see [Using EdgeNet](https://edge-net.org/using_EdgeNet.html) for how to download a config file)/
 2. Run `$ kubectl get ns` if you've installed kubectl to make sure that you're talking to the right cluster.
 3. Ensure that you have a [Docker Hub](https://hub.docker.com/) account.  Docker is used to pull images onto your Services and Docker Hub is an extremely convenient place to pull from.
 
@@ -116,7 +117,7 @@ $ docker push <username>/edgenet-helloworld
 to push to Docker Hub.
 
 ## Deploy a Service on EdgeNet
-Log in to the [EdgeNet head node](https://headnode.edge-net.org/) following the directions in [Using EdgeNet](https://edge-net.org/using_EdgeNet.html).  Once you are logged in and have chosen your namespace, you should see ![Dashboard Ready](assets/images/dashboardReady.png).
+Log in to the [EdgeNet head node](https://headnode.edge-net.org/) following the directions in [Using EdgeNet](https://edge-net.org/using_EdgeNet.html).  Once you are logged in and have chosen your namespace, you should see ![Create Button](assets/images/createButton.png).
 
 Click the Create Button in the top right.  You should see ![Create](assets/images/create.png).  Enter the following YAML code into the text box:
 
