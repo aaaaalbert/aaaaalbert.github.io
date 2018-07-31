@@ -142,10 +142,10 @@ spec:
 
 Where, as alwayus <username> is your Docker Hub username and <your port> is the random port you've chosen.  Hit `Upload`.  
 
-The line `hostNetwork:true` tells Kubernetes to expose the ports from the Pod.  A `ReplicaSet` is a number of Pods placed in the cluster; in this case, we have chosen one, and since we didn't specify where this should be placed it will be placed at a node chosen by Kubernetes.  You should now see this: ![Deployed](assets/images/replica_set_deployed.png).  You can now test with
+The line `hostNetwork:true` tells Kubernetes to expose the ports from the Pod.  A `ReplicaSet` is a number of Pods placed in the cluster; in this case, we have chosen one, and since we didn't specify where this should be placed it will be placed at a node chosen by Kubernetes.  You should now see this: ![Deployed](assets/images/replica_set_deployed.png).  Supposing the node is `toronto.edge-net.io` as shown above, you can now test with any browser by navigating to `http://toronto.edge-net.io:<port-number>/hello?hostname=Toronto` or with
 
 ```bash
-$ curl https://toronto.edge-net.io:<port-number>/hello?hostname=toronto
+$ curl http://toronto.edge-net.io:<port-number>/hello?hostname=Toronto
 ```
 
 And get "Hello, World, from Toronto!"
@@ -352,6 +352,9 @@ nyu.edge-net.io | Hello, World, from nyu! | 188
 northwestern.edge-net.io | Hello, World, from northwestern! | 147
 hawaii.edge-net.io | Hello, World, from hawaii! | 132
 
+## Be Sure to Clean Up!
+
+When you're done, choose Delete from the right-hand menu in ReplicaSets ![Delete](assets/images/delete.png).
 
 
 
