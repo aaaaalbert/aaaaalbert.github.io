@@ -10,9 +10,8 @@ Software you should have installed to run this tutorial:
 
 Very helpful:
 
-1. [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/).  This is to control and query Kubernetes from your desktop rather than use the dashboard, though you can do everything on the dashboard.
-
-2. [Minikube](https://kubernetes.io/docs/setup/minikube/).  This lets you run a Kubernetes cluster on your laptop, very handy for testing.
+1. [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/). This is to control and query Kubernetes from your desktop rather than use the dashboard, though you can do everything on the dashboard.
+2. [Minikube](https://kubernetes.io/docs/setup/minikube/). This lets you run a Kubernetes cluster on your laptop, very handy for testing.
 
 As a note, node.js isn't essential.  We're just going to write a simple request/response HTTP server to do Hello, World, so if you prefer another server feel free.  It just need to serve a get request with an argument, and echo back the argument.
 
