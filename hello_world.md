@@ -57,7 +57,7 @@ Test the server by running
 $ node server.js
 ```
 
-and then, in any browser, go to `http://localhost:8080/hello?hostname=foo`.  You should see ` Hello, World, from foo!`.  You can also try 
+and then, in any browser, go to `http://localhost:8080/hello?hostname=foo`.  You should see `Hello, World, from foo!`.  You can also try 
 
 ```bash
 $ curl http://localhost:8080/hello?hostname=foo
@@ -81,7 +81,7 @@ CMD node server.js
 _Note_: in the above, change 8080 to whatever random port you picked for your server.  Save this into `dockerfile` (note: no extension) and run:
 
 ```bash
-$ docker build -t docker build -t <username>/edgenet-helloworld .
+$ docker build -t  <username>/edgenet-helloworld .
 ```
 
 where `<username>` is your Docker Hub user name.
