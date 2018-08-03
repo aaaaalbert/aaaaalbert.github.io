@@ -181,10 +181,11 @@ Once you've clicked, you will see this screen:
 ![Head Node](assets/images/headNode1.png)
 
 
-Sorry about the error messages in orange.  We are working to get
-rid of them.  You are in the default namespace, where you have no
-permissions.  Click on the namespace name (middle of the left-hand
-side) and type in the namespace name you saw in the welcome page, as in this image:
+The error messages in orange show that you are in the default namespace, where you have
+no permissions.   We apologize; at the moment, the standard Kubernetes Dashboard doesn't permit us to assign your initial
+namespace.  Just ignore these errors; the idea is to get into the right namespace.  
+Click on the namespace pulldown (middle of the left-hand
+side) and select the namespace name you saw in the welcome page, as in this image:
 ![Namespace Entry](assets/images/headNode2.png)
 
 You'll see this
