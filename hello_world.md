@@ -181,7 +181,7 @@ spec:
             hostPort: <your port>
 ```
 
-Where, as alwayus <username> is your Docker Hub username and <your port>
+Where, as always, `<username>` is your Docker Hub username and `<your port>`
 is the random port you've chosen.  Hit `Upload`.
 
 The line `hostNetwork:true` tells Kubernetes to expose the ports from
