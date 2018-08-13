@@ -76,6 +76,8 @@ spec:
 
 Substitute `<YOUR PORT>` with a TCP port number between 4096 and 65535.
 <span id="SubstituteRandomNumberHere">.</span> Next, hit `Upload`.
+
+{% raw %}
 <script>
 /*
  * Replace the suggestion to use "a random port" with
@@ -90,6 +92,7 @@ myPort = Math.floor(Math.random() * (max - min + 1)) + min;
 mySpan = document.getElementById("SubstituteRandomNumberHere");
 mySpan.innerHTML = "For example, try port " + myPort + " (but don't worry if it is already used by another experimenter &mdash; in that case just try another).";
 </script>
+{% endraw %}
 
 The line `hostNetwork:true` tells Kubernetes to expose the ports from
 the Pod.  A `ReplicaSet` is a number of Pods placed in the cluster; in
