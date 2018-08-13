@@ -75,7 +75,7 @@ spec:
 ```
 
 Substitute `<YOUR PORT>` with a TCP port number between 4096 and 65535.
-<span id="SubstituteRandomNumberHere">.</span> Next, hit `Upload`.
+<span id="SubstituteRandomNumberHere"></span> Next, hit `Upload`.
 
 {% raw %}
 <script>
