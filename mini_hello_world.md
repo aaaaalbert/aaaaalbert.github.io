@@ -65,7 +65,6 @@ spec:
       labels:
         app: hello-world
     spec:
-      hostNetwork: true           
       containers:
         - name: hello-world
           image: edgenetproject/helloworld
@@ -74,7 +73,7 @@ spec:
             hostPort: <YOUR PORT>
 ```
 
-Substitute `<YOUR PORT>` with a TCP port number between 4096 and 65535.
+Substitute `<YOUR PORT>` with a TCP port number between 40000 and 65000.
 <span id="SubstituteRandomNumberHere"></span> Next, hit `Upload`.
 
 {% raw %}
@@ -86,34 +85,40 @@ Substitute `<YOUR PORT>` with a TCP port number between 4096 and 65535.
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
  * Thanks!
  */
-min = 10000;
-max = 65535;
+min = 40000;
+max = 65000;
 myPort = Math.floor(Math.random() * (max - min + 1)) + min;
 mySpan = document.getElementById("SubstituteRandomNumberHere");
 mySpan.innerHTML = "For example, try port " + myPort + " (but don't worry if it is already used by another experimenter &mdash; in that case just try another).";
 </script>
 {% endraw %}
 
-The line `hostNetwork:true` tells Kubernetes to expose the ports from
-the Pod.  A `ReplicaSet` is a number of Pods placed in the cluster; in
-this case, we have chosen one, and since we didn't specify where this
-should be placed it will be placed at a node chosen by Kubernetes.  You
-should now see this:
+A `ReplicaSet` [defines a group of Pods placed in the cluster](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/);
+in this case, we have one single pod, and since we didn't specify where this
+should be placed it will be placed at a node chosen by Kubernetes.
+The `ports` section of the config tells Kubernetes to map port 8000/TCP
+on the container (where our echo server listens) to the port number
+you choose, allowing the echo server to accept incoming connections
+on your chosen port.
+
+You should now see this:
 
 ![Deployed](assets/images/replica_set_deployed.png).
 
 Supposing the node is `toronto.edge-net.io` as shown above, you can now
 test with any browser by navigating to
-`http://toronto.edge-net.io:<port-number>/hello?hostname=Toronto` or
+`http://toronto.edge-net.io:<YOUR-PORT>/hello?hostname=Toronto` or
 with
 
 ```bash
-$ curl http://toronto.edge-net.io:<port-number>/hello?hostname=Toronto
+$ curl http://toronto.edge-net.io:<YOUR-PORT>/hello?hostname=Toronto
 ```
 
-And get "Hello dyn12345678.yourisp.com from host Toronto!"
+And get "Hello dyn12345678.yourisp.com from host Toronto!" (or similar)
+in reply.
 
-Clicking on the links and menus will give you various views into your
+Clicking on the links and menus of the Dashboard will give you various
+views into your
 ReplicaSet.  Play around with them and see what you can find out.  When
 you're done, choose `Delete` from the right-hand menu in ReplicaSets.
 
@@ -141,7 +146,6 @@ spec:
       labels:
         app: hello-world
     spec:
-      hostNetwork: true           
       containers:
         - name: hello-world
           image: edgenetproject/helloworld
@@ -157,8 +161,11 @@ replaces ReplicaSet.  But this gives a dramatic change in result, as
 we'll see.  Click `Upload`.  You will now see this:
 ![DaemonSet](assets/images/daemon_set.png).
 
-_24 pods running, one on
-every active EdgeNet node!_.  Of course, to test this we don't want to
+_24 pods running, one on every active EdgeNet node!_. This is precisely
+what `DaemonSet`s  are [supposed to do](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/):
+Running a copy of a Pod on every node.
+
+Of course, to test this we don't want to
 manually type in every one, so we'll download the names of the nodes
 using `kubectl`.
 
