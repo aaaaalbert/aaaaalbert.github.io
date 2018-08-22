@@ -10,11 +10,12 @@ well, but we haven't tested it.) The tutorial assumes that you have
 
 ## What You Will Do
 You will deploy a pre-built Docker image to EdgeNet nodes around the
-world. The image will contain a simple web server that you write that
+world. The image contains a simple web echo server that
 provides the following interaction: navigating to it with the query
 string `?hostname=foo` will return a page with the text `Hello
-dyn1234567.yourisp.com from foo!` (using the name associated with your
-current uplink). A script on your own machine will navigate to each of
+dyn1234567.yourisp.com from foo!` (using the name or IP address
+associated with your current uplink).
+A script on your own machine will navigate to each of
 the web servers and collect the responses.
 
 ## Technologies You Will Use
