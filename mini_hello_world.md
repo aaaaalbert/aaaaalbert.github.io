@@ -75,7 +75,7 @@ spec:
 ```
 
 Substitute `<YOUR PORT>` with a TCP port number between 40000 and 65000.
-<span id="SubstituteRandomNumberHere"></span> Next, hit `Upload`.
+<span id="SubstituteRandomNumberHere"></span>
 
 {% raw %}
 <script>
@@ -96,13 +96,16 @@ mySpan.innerHTML = "For example, try port " + myPort + " (but don't worry if it 
 
 A `ReplicaSet` [defines a group of Pods placed in the cluster](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/);
 in this case, we have one single pod, and since we didn't specify where this
-should be placed it will be placed at a node chosen by Kubernetes.
+should be placed, Kubernetes will choose a node for us.
+The `image` line request the `helloworld` Docker image from our
+account on Docker Hub.
 The `ports` section of the config tells Kubernetes to map port 8000/TCP
-on the container (where our echo server listens) to the port number
+on the container (where the echo server in our Docker image listens)
+to the port number
 you choose, allowing the echo server to accept incoming connections
 on your chosen port.
 
-You should now see this:
+Next, hit `Upload`. You should now see this:
 
 ![Deployed](assets/images/replica_set_deployed.png).
 
@@ -176,35 +179,15 @@ In a terminal window, type
 $ kubectl get pods -o wide
 ```
 
-You'll get an output like this:
+You'll get an output like this (though many more lines):
 
 ```bash
 NAME                READY     STATUS    RESTARTS   AGE       IP                                      NODE
 hello-world-2l6t7   1/1       Running   0          4m        192.1.242.153                           gpo.edge-net.io
 hello-world-57sl4   1/1       Running   0          4m        72.36.65.80                             illinois.edge-net.io
 hello-world-6qn5z   1/1       Running   0          4m        10.103.0.13                             ufl.edge-net.io
-hello-world-7984p   1/1       Running   0          4m        10.103.0.2                              waynestate.edge-net.io
-hello-world-7dw4r   1/1       Running   0          4m        10.103.0.3                              osf.edge-net.io
-hello-world-glxgz   1/1       Running   0          4m        10.103.0.2                              wv.edge-net.io
-hello-world-hhsrp   1/1       Running   0          4m        137.110.252.67                          ucsd.edge-net.io
-hello-world-kdp9w   1/1       Running   0          4m        199.109.64.50                           nysernet.edge-net.io
-hello-world-lfpt4   1/1       Running   0          4m        10.103.0.10                             uh.edge-net.io
-hello-world-lkgzf   1/1       Running   0          4m        66.104.96.101                           ohio.edge-net.io
-hello-world-m6lrv   1/1       Running   0          4m        149.165.249.129                         indiana.edge-net.io
-hello-world-mq5cn   1/1       Running   0          4m        204.102.244.69                          cenic.edge-net.io
-hello-world-mw6qn   1/1       Running   0          4m        10.12.9.4                               toronto-core.edge-net.io
-hello-world-nbjmn   1/1       Running   0          4m        10.2.9.3                                toronto.edge-net.io
-hello-world-nk5qs   1/1       Running   0          4m        104.141.5.26                            louisiana.edge-net.io
-hello-world-nrs2p   1/1       Running   0          4m        193.190.127.165                         iminds.edge-net.io
-hello-world-prfqj   1/1       Running   0          4m        204.102.228.172                         nps.edge-net.io
-hello-world-q2k4w   1/1       Running   0          4m        10.103.0.10                             node-0
-hello-world-qgtcp   1/1       Running   0          4m        192.41.233.55                           umich.edge-net.io
-hello-world-qtwk6   1/1       Running   0          4m        2001:660:3302:287b:21e:67ff:fe06:a2a8   france.edge-net.io
-hello-world-rmgr2   1/1       Running   0          4m        130.127.215.147                         clemson.edge-net.io
-hello-world-sbvdz   1/1       Running   0          4m        192.86.139.67                           nyu.edge-net.io
-hello-world-t6pwq   1/1       Running   0          4m        165.124.51.203                          northwestern.edge-net.io
-hello-world-xfrch   1/1       Running   0          4m        128.171.8.122                           hawaii.edge-net.io
 ```
+
 
 `kubectl` is an extremely flexible and powerful tool to query and manage
 your deployments and interaction with EdgeNet.  We can simply pipe this
