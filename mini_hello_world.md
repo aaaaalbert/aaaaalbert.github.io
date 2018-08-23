@@ -202,6 +202,7 @@ NAME                READY     STATUS    RESTARTS   AGE       IP                 
 hello-world-2l6t7   1/1       Running   0          4m        192.1.242.153                           gpo.edge-net.io
 hello-world-57sl4   1/1       Running   0          4m        72.36.65.80                             illinois.edge-net.io
 hello-world-6qn5z   1/1       Running   0          4m        10.103.0.13                             ufl.edge-net.io
+# etc. etc.
 ```
 
 
@@ -211,8 +212,7 @@ into a file and do some editing, but fortunately `kubectl` will do a lot
 of the work for us:
 
 ```bash
-$ kubectl get pods -o=custom-columns=node:.spec.nodeName
-node
+$ kubectl get pods -o=custom-columns=node:.spec.nodeName --no-headers
 illinois.edge-net.io
 ufl.edge-net.io
 waynestate.edge-net.io
@@ -222,7 +222,7 @@ waynestate.edge-net.io
 Just the node names!  That's what we need.  Now let's put them in a file:
 
 ```bash
-$ kubectl get pods -o=custom-columns=node:.spec.nodeName  > data.txt
+$ kubectl get pods -o=custom-columns=node:.spec.nodeName --no-headers > data.txt
 ```
 
 We can then use the node list in `data.txt` with some reporting code.
