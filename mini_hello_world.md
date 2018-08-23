@@ -3,44 +3,47 @@
 # A Minimal *Hello, World* on EdgeNet
 In this tutorial, we're going to show you how to deploy a minimal
 experiment across EdgeNet and use it.  This tutorial assumes that you're
-using a Unix-derived system, such as Linux, macOS, or a Linux-based
+using a unixoid system, such as Linux, macOS, or a Linux-based
 VM on Windows. (It's likely a Cygwin environment will work on Windows as
-well, but we haven't tested it.) The tutorial assumes that you have
-[Python 2.7](https://www.python.org/downloads/) installed on your system.
+well, but we haven't tested it.)
 
 ## What You Will Do
-You will deploy a pre-built Docker image to EdgeNet nodes around the
+In **Part 1** of this tutorial,
+you will deploy a pre-built Docker image to EdgeNet nodes around the
 world. The image contains a simple web echo server that
 provides the following interaction: navigating to it with the query
 string `?hostname=foo` will return a page with the text `Hello
 dyn1234567.yourisp.com from foo!` (using the name or IP address
 associated with your current uplink).
-A script on your own machine will navigate to each of
+
+In **Part 2** of this tutorial,
+a script on your own machine will navigate to each of
 the web servers and collect the responses.
 
-## Technologies You Will Use
-The technologies that you will use are:
 
-1. [Kubernetes](https://kubernetes.io/), to deploy the containers to the EdgeNet nodes
-2. [Python](https://www.python.org/), for the script to query the web servers
+## Preparations
 
-## Prepare
-1. Create an account at EdgeNet (see [Using EdgeNet](https://edge-net.org/using_EdgeNet.html)),
-  making a note of your *namespace*
-2. Install software: [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
-  to control a Kubernetes cluster from the command line
+First of all, create an account at EdgeNet (see [Using EdgeNet](https://edge-net.org/using_EdgeNet.html)),
+making a note of your *namespace*.
 
-Download and test:
-1. Download your config file from the portal (see [Using EdgeNet](https://edge-net.org/using_EdgeNet.html)
- * If you want to use this as your default conig (or don't mind overwriting
-   your previous config), save a copy as `$HOME/.kube/config`.
- * To keep your previous config
-2. Run `$ kubectl get nodes` to make sure that you're talking to the
-  right cluster. The resulting list should show many machines under the
-  `edge-net.io` domain.
+For Part 1 of the tutorial, all you need is a web browser.
+
+Part 2 requires a working installation of [Python 2.7](https://www.python.org/downloads/).
+We also recommend the [Kubernetes](https://kubernetes.io/) control tool,
+[`kubectl`](https://kubernetes.io/docs/tasks/tools/install-kubectl/),
+to control your Kubernetes cluster from the command line.
 
 
-## Deploy a Service on EdgeNet
+## Download and test config
+1. Download your config file from the [EdgeNet portal](https://sundewcluster.appspot.com/)
+   to `$HOME/.kube/config`. See [Using EdgeNet](https://edge-net.org/using_EdgeNet.html)
+   for details of the process.
+2. If you already installed `kubectl`, run it to make sure that you're talking to the
+  right cluster:  `$ kubectl get nodes`. The resulting list should show many machines
+  under the `edge-net.io` domain.
+
+
+# Part 1: Deploy a Service on EdgeNet
 Log in to the [EdgeNet head node](https://headnode.edge-net.org/)
 following the directions in [Using EdgeNet](https://edge-net.org/using_EdgeNet.html).
 Once you are logged in and have chosen your namespace, you should
@@ -130,7 +133,7 @@ you're done, choose `Delete` from the right-hand menu in ReplicaSets.
 
 It may take a few minutes to delete.
 
-## A DaemonSet and Using `kubectl`
+## Deploy A DaemonSet
 In this last section we're going to make `hello-world` run on _every_
 node in EdgeNet.  And it's just as easy as it was to run on a single
 node.
@@ -169,16 +172,29 @@ _24 pods running, one on every active EdgeNet node!_. This is precisely
 what `DaemonSet`s  are [supposed to do](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/):
 Running a copy of a Pod on every node.
 
-Of course, to test this we don't want to
-manually type in every one, so we'll download the names of the nodes
-using `kubectl`.
+--------------
 
-In a terminal window, type
+# Part 2: Experiments With Remote Pods
+
+In Part 1 of the tutorial, you deployed a pre-built Docker image of
+a simple web echo server to EdgeNet nodes around the world. Now,
+we will construct a simple experiment based on this deployment.
+
+As said above, `curl` or your browser essentially suffice to test the
+functionality of our deployed web echo service. However, it gets tedious
+quickly to check *every* pod, so we will script the interaction and
+also gather measurements.
+
+First of all, we need the names of all nodes that we run on. Assuming
+you have [`kubectl`](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
+installed already, open a terminal window and type
 
 ```bash
 $ kubectl get pods -o wide
 ```
 
+This instructs `kubectl` to query the EdgeNet cluster for all pods
+belonging to you, and show the output in "wide" format.
 You'll get an output like this (though many more lines):
 
 ```bash
@@ -190,7 +206,7 @@ hello-world-6qn5z   1/1       Running   0          4m        10.103.0.13        
 
 
 `kubectl` is an extremely flexible and powerful tool to query and manage
-your deployments and interaction with EdgeNet.  We can simply pipe this
+your deployments and interaction with EdgeNet.  We can simply pipe the above
 into a file and do some editing, but fortunately `kubectl` will do a lot
 of the work for us:
 
@@ -200,44 +216,16 @@ node
 illinois.edge-net.io
 ufl.edge-net.io
 waynestate.edge-net.io
-osf.edge-net.io
-wv.edge-net.io
-ucsd.edge-net.io
-nysernet.edge-net.io
-uh.edge-net.io
-ohio.edge-net.io
-indiana.edge-net.io
-cenic.edge-net.io
-toronto-core.edge-net.io
-toronto.edge-net.io
-louisiana.edge-net.io
-iminds.edge-net.io
-nps.edge-net.io
-node-0
-umich.edge-net.io
-france.edge-net.io
-clemson.edge-net.io
-nyu.edge-net.io
-northwestern.edge-net.io
-hawaii.edge-net.io
+# etc. etc.
 ```
 
 Just the node names!  That's what we need.  Now let's put them in a file:
 
 ```bash
-$ kubectl get pods -o=custom-columns=node:.spec.nodeName  > data.py
+$ kubectl get pods -o=custom-columns=node:.spec.nodeName  > data.txt
 ```
 
-Edit `data.py` to look like this:
-
-```python
-nodes = [
-    'illinois.edge-net.io', 'ufl.edge-net.io', 'waynestate.edge-net.io', 'osf.edge-net.io', 'wv.edge-net.io', 'ucsd.edge-net.io', 'nysernet.edge-net.io', 'uh.edge-net.io', 'ohio.edge-net.io', 'indiana.edge-net.io', 'cenic.edge-net.io', 'toronto-core.edge-net.io', 'toronto.edge-net.io', 'louisiana.edge-net.io', 'iminds.edge-net.io', 'nps.edge-net.io', 'node-0', 'umich.edge-net.io', 'france.edge-net.io', 'clemson.edge-net.io', 'nyu.edge-net.io', 'northwestern.edge-net.io', 'hawaii.edge-net.io',
-    ]
-port = 8080
-```
-
-We can then use `data.py` with some reporting code.
+We can then use the node list in `data.txt` with some reporting code.
 
 ```python
 #!/usr/bin/python2.7
